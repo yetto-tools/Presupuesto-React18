@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import { Message } from 'postcss';
+import React, { useState } from 'react'
+import { Message } from '../components/Message'
 
-export const Budget = ({budget, setBudget}) => {
+export const Budget = ({budget, setBudget, 
+    isvalidBudget, setIsValidBudget}) => {
 
     const [mensaje, setMesaje] = useState('')
+    
     const handlerInputBudget = (e)=>{
         e.preventDefault();
-        if(!(Number(budget)) || Number(budget)<0 ){
-            setMesaje("No es Un tipo Valido");   
+        if(!budget || budget<0 ){
+            return setMesaje('No es Un tipo Valido');
         }
-        else {
-            setMesaje("Todo Correcto!!");   
-        }
-         
+        setMesaje('')
+        setIsValidBudget(true)
+
 
     };
 
@@ -24,12 +25,13 @@ export const Budget = ({budget, setBudget}) => {
                         <label className='text-sky-500 font-semibold'>Definir Presupuesto</label>
                         <div className='flex items-center border-b border-rose-500 py-2'>
                             
-                            <input className='appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none' 
-                                type='number' placeholder='Añadir tu Presupuesto' aria-label='Añade Tu Presupuesto' min ="0.01" step="1" max="9999999999"
-                                onInput = {(e)=>{ console.log(e.target.value)} }
+                            <input className='appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none' 
+                                type='number' placeholder='Añadir tu Presupuesto' aria-label='Añade Tu Presupuesto'
+                                onChange= {(e)=>{setBudget(e.target.value)} }
                             />
                             <button className='flex-shrink-0 bg-rose-500 hover:bg-rose-700 border-rose-500 hover:border-rose-700 text-sm border-4 text-white py-1 px-2 rounded' 
                                 type='button'
+                                onClick={handlerInputBudget}
                             > 
                                 Añadir
                             </button>
@@ -38,7 +40,7 @@ export const Budget = ({budget, setBudget}) => {
                             </button> */}
                         </div>
                         <div>
-                            <Message colorAlert="red">{mensaje}</Message>
+                            {mensaje && <Message colorAlert="bg-red-100 text-red-700 font-semibold">{mensaje}</Message>}
                         </div>
                     </form>
                 </div>

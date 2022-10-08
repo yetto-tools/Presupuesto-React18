@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Header } from './components/Header'
 import { Budget } from './components/Bugdet'
 import { ControlBudget } from './components/ControlBudget'
-import IconNewExpense from './assets/img/nuevo-gasto.svg'
 import { ListExpenses } from './components/ListExpenses'
+import IconNewExpense from './assets/img/nuevo-gasto.svg'
 
 
 function App() {
